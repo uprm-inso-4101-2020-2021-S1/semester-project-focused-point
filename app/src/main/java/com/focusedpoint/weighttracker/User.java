@@ -5,6 +5,7 @@ import com.focusedpoint.weighttracker.DataStructures.hashtable.HashTableSCFactor
 import com.focusedpoint.weighttracker.DataStructures.list.ArrayList;
 import com.focusedpoint.weighttracker.DataStructures.map.Map;
 import com.focusedpoint.weighttracker.Storage.Date;
+import com.focusedpoint.weighttracker.Storage.FoodEntry;
 import com.focusedpoint.weighttracker.Storage.WeightEntry;
 
 import java.text.SimpleDateFormat;
@@ -15,7 +16,7 @@ public class User {
 	private String username, password;				
 	private int age;
 	private ArrayList<WeightEntry> weights;		//Weights will be measured in pounds
-	public Map<String, Double> ht;			//HashTable for calories
+	public Map<String, FoodEntry> ht;			//HashTable that contains a key which is the name of the food and a value that contains an object holding all the information related to the food.
 	private int heightFT, heightIN;			//Height will be measured in feet & inches
 	public enum sex {
 		MALE, FEMALE
@@ -35,7 +36,7 @@ public class User {
 		this.age = age;
 		this.weights = new ArrayList<WeightEntry>(10);
 		this.weights.add(new WeightEntry(weight,Date.currentDate()));
-		HashTableFactory<String, Double> factory = new HashTableSCFactory<String, Double>();
+		HashTableFactory<String, FoodEntry> factory = new HashTableSCFactory<String, FoodEntry>();
 		this.ht = factory.getInstance(10);
 		this.heightFT = heightFT;
 		this.heightIN = heightIN;
@@ -98,9 +99,11 @@ public class User {
 	public int heightInInches() {
 		return (heightFT*12)+heightIN;
 	}
-	
+
+	//adds the meal to ht but it does not store when it was eaten.
 	public void addMeal(String food, double cal) {
-		this.ht.put(food, cal);
+		if(!ht.containsKey(food))
+			this.ht.put(food, new FoodEntry(cal));
 	}
 	
 	//getters & setters

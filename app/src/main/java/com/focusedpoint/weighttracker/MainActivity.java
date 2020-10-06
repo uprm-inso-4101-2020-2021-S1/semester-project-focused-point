@@ -10,6 +10,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     Button SubmitButton,GraphButton;
     //List that contains all the weights of a person.
     // (Planing to make each index of the list represent a day of the month.)
-    ArrayList<Double> Weights = new ArrayList<Double>(31);
+    ArrayList<Integer> Weights = new ArrayList<Integer>(31);
     GraphView Graph;
     ArrayList<Button> Buttons;
 
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         NumberField = findViewById(R.id.NumberField);
         Graph = (GraphView) findViewById(R.id.graph);
+        Graph.setVisibility(View.INVISIBLE);
         enableSubmitButton();
         enableGraphButton();
     }
@@ -51,10 +53,18 @@ public class MainActivity extends AppCompatActivity {
             SeriesGraph = new LineGraphSeries<DataPoint>();
             for(int i=0;i<Weights.size();i++){
             //adds a new point to the graph object
-            SeriesGraph.appendData(new DataPoint(i+1,Weights.get(i)),true,Weights.size());
+            SeriesGraph.appendData(new DataPoint(i+1,Weights.get(i)),false,31);
+            SeriesGraph.setDrawDataPoints(true);
             }
             //adds the data stored in SeriesGraph to the GraphView so that it can draw the graph.
+            //SeriesGraph needs more than 3 data points so that the graph can display correctly.
             Graph.addSeries(SeriesGraph);
+            if(Weights.size()>=5){
+            Graph.setVisibility(View.VISIBLE);}
+            else {
+                Toast toast = Toast.makeText(getApplicationContext(), "To graph weights more than 5 are needed", Toast.LENGTH_LONG);
+                toast.show();
+            }
             }
         });
     }
@@ -79,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
             //checks if the text can be converted to a Double.
             // If so, it adds it to weights and sets the text inside NumberField to empty.
             try {
-                Weights.add(Double.parseDouble(NumericalInput));
+                Weights.add(Integer.parseInt(NumericalInput));
                 NumberField.setText("");
                 String debug = ArrayListToString(Weights);
                 Log.println(Log.INFO,"debug","The weights are:"+debug);
@@ -92,42 +102,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     //Turns an arrayList of doubles into a single string
-    public String ArrayListToString(ArrayList<Double> list){
+    public String ArrayListToString(ArrayList<Integer> list){
         String Temp ="";
-        for(Double s:list)
+        for(Integer s:list)
             Temp=Temp+","+s;//separates each element of the list by a comma.
         return Temp;
     }
-
-//    private void enableNumberField() {
-//        NumberField = findViewById(R.id.NumberField);
-//        NumberField.setOnKeyListener(new View.OnKeyListener(){
-//
-//            @Override
-//            public boolean onKey(View v, int keyCode, KeyEvent event) {
-//                if(event.getAction()==KeyEvent.ACTION_DOWN && isNumeric(keyCode)){
-//                    Input = Input+=keyCode;
-//                    NumberField.setText(Input);
-//                    return true;
-//                }
-//                return false;
-//            }});
-//    }
-
-//    //function used to find out if the given keycode is numeric
-//    public boolean isNumeric(int KeyCode){
-//        //If the keycode provided is the same as any number from 0-9
-//        if(KeyCode==KeyEvent.KEYCODE_0|KeyCode==KeyEvent.KEYCODE_1
-//                |KeyCode==KeyEvent.KEYCODE_2|KeyCode==KeyEvent.KEYCODE_3
-//                |KeyCode==KeyEvent.KEYCODE_4|KeyCode==KeyEvent.KEYCODE_5
-//                |KeyCode==KeyEvent.KEYCODE_6|KeyCode==KeyEvent.KEYCODE_7
-//                |KeyCode==KeyEvent.KEYCODE_8|KeyCode==KeyEvent.KEYCODE_9){
-//            return true;
-//        }
-//        else{
-//            //if not, then it is not a number
-//            return false;}
-//    }
 
 
 }

@@ -99,6 +99,8 @@ public class MainActivity extends AppCompatActivity {
         return Temp;
     }
 
+
+
 //    private void enableNumberField() {
 //        NumberField = findViewById(R.id.NumberField);
 //        NumberField.setOnKeyListener(new View.OnKeyListener(){

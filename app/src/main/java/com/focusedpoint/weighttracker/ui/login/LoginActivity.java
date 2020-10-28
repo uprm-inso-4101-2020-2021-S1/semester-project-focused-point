@@ -5,6 +5,7 @@ import android.app.Activity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -23,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.focusedpoint.weighttracker.R;
+import com.focusedpoint.weighttracker.SignUpActivity;
 import com.focusedpoint.weighttracker.ui.login.LoginViewModel;
 import com.focusedpoint.weighttracker.ui.login.LoginViewModelFactory;
 
@@ -127,5 +129,9 @@ public class LoginActivity extends AppCompatActivity {
 
     private void showLoginFailed(@StringRes Integer errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
+    }
+
+    public void OpenSignupPage(View view) {
+        startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
     }
 }

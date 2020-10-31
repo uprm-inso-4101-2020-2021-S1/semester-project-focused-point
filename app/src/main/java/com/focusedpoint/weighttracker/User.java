@@ -1,5 +1,8 @@
 package com.focusedpoint.weighttracker;
 
+import android.content.Context;
+import android.util.Log;
+
 import com.focusedpoint.weighttracker.DataStructures.hashtable.HashTableFactory;
 import com.focusedpoint.weighttracker.DataStructures.hashtable.HashTableSCFactory;
 import com.focusedpoint.weighttracker.DataStructures.list.ArrayList;
@@ -8,7 +11,18 @@ import com.focusedpoint.weighttracker.Storage.Date;
 import com.focusedpoint.weighttracker.Storage.FoodEntry;
 import com.focusedpoint.weighttracker.Storage.WeightEntry;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
+import java.util.Scanner;
 
 public class User {
 	
@@ -55,6 +69,12 @@ public class User {
 			throw new IllegalArgumentException("Weight must be at least 1");
 		}
 		this.weights.add(new WeightEntry(w, Date.currentDate()));
+	}
+	public void setWeight(int n,String date) {
+		if (n < 1) {
+			throw new IllegalArgumentException("Weight must be at least 1");
+		}
+		this.weights.add(new WeightEntry(n, date));
 	}
 	
 	//Calculates BMI.
@@ -105,6 +125,11 @@ public class User {
 		if(!ht.containsKey(food))
 			this.ht.put(food, new FoodEntry(cal));
 	}
+	//adds the meal to ht but it does not store when it was eaten.
+	public void addMeal(String food, double cal,ArrayList<String> TimesEaten) {
+		if(!ht.containsKey(food))
+			this.ht.put(food, new FoodEntry(cal,TimesEaten));
+	}
 	
 	//getters & setters
 	public String getUsername() { 
@@ -147,9 +172,36 @@ public class User {
 	public void setHeightIN(int in) {
 		this.heightIN = in;
 	}
-	
-	public String toString() {
-		return "(" + username + ", " + password + ", " + uSex + ", " + age + " yrs, " 
-				+ currentWeight() + " lb, " + heightFT + "'" + heightIN + "\")";
+
+	public sex getSex(){
+		return  uSex;
 	}
+
+	public void setSex(sex sex){
+		  uSex=sex;
+	}
+
+	public ArrayList<WeightEntry> getWeights(){
+		return weights;
+	}
+
+	public void setWeights(ArrayList<WeightEntry> list){
+		this.weights=list;
+	}
+
+	public String toString() {
+		return "(" + username + ", " + password + ", " + uSex + ", " + age + " yrs, "
+				+ currentWeight() + " lb, " + heightFT + "'" + heightIN + "\")"+"\nWeights with Dates:\n"+getWeights().toString()+"Foods with Calories:\n"+ht.toString();
+	}
+	public void clear(){
+		username="";
+		password = "";
+		age=0;
+		this.weights = new ArrayList<WeightEntry>(10);
+		HashTableFactory<String, FoodEntry> factory = new HashTableSCFactory<String, FoodEntry>();
+		this.ht = factory.getInstance(10);
+		this.heightFT = 0;
+		this.heightIN = 0;
+	}
+
 }

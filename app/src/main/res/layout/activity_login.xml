@@ -61,8 +61,9 @@
         app:layout_constraintHorizontal_bias="0.235"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.559"
-        tools:text="Sign In" />
+        app:layout_constraintVertical_bias="0.554"
+        tools:text="Sign In"
+        android:onClick="signIn"/>
 
     <ProgressBar
         android:id="@+id/loading"
@@ -94,5 +95,5 @@
         app:layout_constraintHorizontal_bias="0.671"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.551" />
+        app:layout_constraintVertical_bias="0.55"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

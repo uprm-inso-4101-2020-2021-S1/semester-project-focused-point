@@ -1,8 +1,10 @@
 package com.focusedpoint.weighttracker.DataStructures.hashtable;
 
 import java.io.PrintStream;
+import java.util.Arrays;
 
 import com.focusedpoint.weighttracker.DataStructures.list.ArrayList;
+import com.focusedpoint.weighttracker.DataStructures.list.ConvertableToString;
 import com.focusedpoint.weighttracker.DataStructures.list.LinkedList;
 import com.focusedpoint.weighttracker.DataStructures.list.List;
 import com.focusedpoint.weighttracker.DataStructures.map.Map;
@@ -15,7 +17,7 @@ public class HashTableSC<K, V> implements Map<K, V> {
 	 * edited by Christopher Lagos
 	 */
 	
-	private static class BucketNode<K, V> {
+	private static class BucketNode<K, V> implements ConvertableToString {
 		private K key;
 		private V value;
 
@@ -30,6 +32,17 @@ public class HashTableSC<K, V> implements Map<K, V> {
 
 		public V getValue() {
 			return value;
+		}
+
+		@Override
+		public String toString() {
+			String result ="";
+			if(value instanceof ConvertableToString){
+				result = result+key+":"+((ConvertableToString)value).toString();
+			}else{
+				result = result+key+":"+value;
+			}
+			return result;
 		}
 	}
 
@@ -187,4 +200,12 @@ public class HashTableSC<K, V> implements Map<K, V> {
 				out.printf("(%s, %s)\n", BN.getKey(), BN.getValue());
 	}
 
+	@Override
+	public String toString() {
+		String result="";
+		for (int i = 0; i < buckets.length; i++)
+			for (BucketNode<K, V> BN : buckets[i])
+				result=result+BN.toString()+"\n";
+	return result;
+	}
 }

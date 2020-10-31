@@ -34,7 +34,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/shapeableImageView2"
-        app:layout_constraintVertical_bias="0.227" />
+        app:layout_constraintVertical_bias="0.227"
+        android:onClick="openWeight"/>
 
     <Button
         android:id="@+id/bmi"
@@ -46,7 +47,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/shapeableImageView2"
-        app:layout_constraintVertical_bias="0.499" />
+        app:layout_constraintVertical_bias="0.499"
+        android:onClick="openBMI"/>
 
     <Button
         android:id="@+id/fmi"
@@ -58,6 +60,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/shapeableImageView2"
-        app:layout_constraintVertical_bias="0.782" />
+        app:layout_constraintVertical_bias="0.782"
+        android:onClick="openFMI"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

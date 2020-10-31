@@ -1,8 +1,10 @@
 package com.focusedpoint.weighttracker.Storage;
 
+import com.focusedpoint.weighttracker.DataStructures.list.ConvertableToString;
+
 import java.text.SimpleDateFormat;
 
-public class Date {
+public class Date implements ConvertableToString {
     //----------------Object Specific Methods and Variables-------------------------------
     public String Date = "";//the date has the following format. day/month/year
     private String Day = "";
@@ -17,8 +19,8 @@ public class Date {
         this.Year = "";
     }
 
-    public void getDate(String date){
-        this.Date = date;
+    public String getDate(){
+        return Date;
     }
 
     public  String getYear(String date){
@@ -45,4 +47,13 @@ public class Date {
         return date.format(new java.util.Date());
     }
 
+    @Override
+    public String toString() {
+        return "Date{" +
+                "Date='" + Date + '\'' +
+                ", Day='" + Day + '\'' +
+                ", Month='" + Month + '\'' +
+                ", Year='" + Year + '\'' +
+                '}';
+    }
 }

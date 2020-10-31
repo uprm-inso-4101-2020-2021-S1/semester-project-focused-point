@@ -1,17 +1,18 @@
 package com.focusedpoint.weighttracker.DataStructures.list;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class ArrayList<E> implements List<E> {
+public class ArrayList<ConvertableToString> implements List<ConvertableToString> {
 
 	// private fields
-	private E elements[];
+	private ConvertableToString elements[];
 	
 	private int currentSize;
 	
 	
-	private class ListIterator implements Iterator<E> {
+	private class ListIterator implements Iterator<ConvertableToString> {
 		private int currentPosition;
 		
 		public ListIterator() {
@@ -24,9 +25,9 @@ public class ArrayList<E> implements List<E> {
 		}
 
 		@Override
-		public E next() {
+		public ConvertableToString next() {
 			if (this.hasNext()) {
-				return (E) elements[this.currentPosition++];
+				return (ConvertableToString) elements[this.currentPosition++];
 			}
 			else
 				throw new NoSuchElementException();
@@ -39,11 +40,11 @@ public class ArrayList<E> implements List<E> {
 		if (initialCapacity < 1)
 			throw new IllegalArgumentException("Capacity must be at least 1.");
 		this.currentSize = 0;
-		this.elements = (E[]) new Object[initialCapacity];
+		this.elements = (ConvertableToString[]) new Object[initialCapacity];
 	}
 
 	@Override
-	public void add(E obj) {
+	public void add(ConvertableToString obj) {
 		if (obj == null)
 			throw new IllegalArgumentException("Object cannot be null.");
 		else {
@@ -56,7 +57,7 @@ public class ArrayList<E> implements List<E> {
 	@SuppressWarnings("unchecked")
 	private void reAllocate() {
 		// create a new array with twice the size
-		E newElements[] = (E[]) new Object[2*this.elements.length];
+		ConvertableToString newElements[] = (ConvertableToString[]) new Object[2*this.elements.length];
 		for (int i = 0; i < this.size(); i++)
 			newElements[i] = this.elements[i];
 		// replace old elements with newElements
@@ -65,7 +66,7 @@ public class ArrayList<E> implements List<E> {
 	}
 
 	@Override
-	public void add(int index, E obj) {
+	public void add(int index, ConvertableToString obj) {
 		if (obj == null)
 			throw new IllegalArgumentException("Object cannot be null.");
 		if (index == this.currentSize)
@@ -87,7 +88,7 @@ public class ArrayList<E> implements List<E> {
 	}
 
 	@Override
-	public boolean remove(E obj) {
+	public boolean remove(ConvertableToString obj) {
 		if (obj == null)
 			throw new IllegalArgumentException("Object cannot be null.");
 		// first find obj in the array
@@ -112,7 +113,7 @@ public class ArrayList<E> implements List<E> {
 	}
 
 	@Override
-	public int removeAll(E obj) {
+	public int removeAll(ConvertableToString obj) {
 		int counter = 0;
 		while (this.remove(obj))
 			counter++;
@@ -120,7 +121,7 @@ public class ArrayList<E> implements List<E> {
 	}
 
 	@Override
-	public E get(int index) {
+	public ConvertableToString get(int index) {
 		if (index >= 0 && index < this.size())
 			return this.elements[index];
 		else
@@ -128,11 +129,11 @@ public class ArrayList<E> implements List<E> {
 	}
 
 	@Override
-	public E set(int index, E obj) {
+	public ConvertableToString set(int index, ConvertableToString obj) {
 		if (obj == null)
 			throw new IllegalArgumentException("Object cannot be null.");
 		if (index >= 0 && index < this.size()) {
-			E temp = this.elements[index];
+			ConvertableToString temp = this.elements[index];
 			this.elements[index] = obj;
 			return temp;
 		}
@@ -141,7 +142,7 @@ public class ArrayList<E> implements List<E> {
 	}
 
 	@Override
-	public E first() {
+	public ConvertableToString first() {
 		if (this.isEmpty())
 			return null;
 		else
@@ -149,7 +150,7 @@ public class ArrayList<E> implements List<E> {
 	}
 
 	@Override
-	public E last() {
+	public ConvertableToString last() {
 		if (this.isEmpty())
 			return null;
 		else
@@ -157,7 +158,7 @@ public class ArrayList<E> implements List<E> {
 	}
 
 	@Override
-	public int firstIndex(E obj) {
+	public int firstIndex(ConvertableToString obj) {
 		for (int i = 0; i < this.size(); i++)
 			if (this.elements[i].equals(obj))
 				return i;
@@ -165,7 +166,7 @@ public class ArrayList<E> implements List<E> {
 	}
 
 	@Override
-	public int lastIndex(E obj) {
+	public int lastIndex(ConvertableToString obj) {
 		for (int i = this.size() - 1; i >= 0; i--)
 			if (this.elements[i].equals(obj))
 				return i;
@@ -183,7 +184,7 @@ public class ArrayList<E> implements List<E> {
 	}
 
 	@Override
-	public boolean contains(E obj) {
+	public boolean contains(ConvertableToString obj) {
 		return this.firstIndex(obj) >= 0;
 	}
 
@@ -195,7 +196,17 @@ public class ArrayList<E> implements List<E> {
 	}
 
 	@Override
-	public Iterator<E> iterator() {
+	public Iterator<ConvertableToString> iterator() {
 		return new ListIterator();
+	}
+
+	@Override
+	public String toString() {
+		String result = "";
+		for(ConvertableToString s:elements){
+			if(s!=null)
+			result=result+s.toString()+"\n";
+		}
+		return result;
 	}
 }

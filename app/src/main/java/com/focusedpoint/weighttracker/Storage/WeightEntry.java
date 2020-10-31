@@ -1,7 +1,9 @@
 package com.focusedpoint.weighttracker.Storage;
 
-public class WeightEntry extends Date {
-    public int weight;
+import com.focusedpoint.weighttracker.DataStructures.list.ConvertableToString;
+
+public class WeightEntry extends Date implements ConvertableToString {
+    private int weight;
 
     public WeightEntry(int weight, String date){
         this.weight = weight;
@@ -14,5 +16,9 @@ public class WeightEntry extends Date {
 
     public void setWeight(int weight) {
         this.weight = weight;
+    }
+
+    public String toString(){
+        return ""+weight+":"+getDate();
     }
 }

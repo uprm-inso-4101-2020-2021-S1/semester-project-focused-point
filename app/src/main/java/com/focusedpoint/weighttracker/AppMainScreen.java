@@ -2,8 +2,11 @@ package com.focusedpoint.weighttracker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import com.focusedpoint.weighttracker.ui.login.LoginActivity;
 
 public class AppMainScreen extends AppCompatActivity {
 
@@ -17,6 +20,7 @@ public class AppMainScreen extends AppCompatActivity {
 
     // Defines what happens when user clicks on "Track My Weight" Button
     public void openWeight(View view) {
+        startActivity(new Intent(AppMainScreen.this, MainActivity.class));
 
     }
 

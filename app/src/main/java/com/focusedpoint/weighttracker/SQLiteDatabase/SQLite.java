@@ -20,6 +20,7 @@ public class SQLite extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
     String createTableStatement = "CREATE TABLE " + USER_TABLE + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, " + USER_USERNAME + " TEXT, "
             + USER_PASSWORD + " TEXT)";
+
     db.execSQL(createTableStatement);
     }
     //upgrades the users database on the apps when the database is changed

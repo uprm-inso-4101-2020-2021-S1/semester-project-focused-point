@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Weight Tracker-app.iml" filepath="$PROJECT_DIR$/.idea/modules/Weight Tracker-app.iml" group="Weight Tracker/app" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/710161153/Weight_Tracker.iml" filepath="$PROJECT_DIR$/.idea/modules/710161153/Weight_Tracker.iml" group="Weight_Tracker" />
       <module fileurl="file://$PROJECT_DIR$/.idea/app.iml" filepath="$PROJECT_DIR$/.idea/app.iml" group="Weight Tracker/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1250471670/semester-project-focused-point-Weight_Tracker.iml" filepath="$PROJECT_DIR$/.idea/modules/-1250471670/semester-project-focused-point-Weight_Tracker.iml" group="Weight_Tracker" />
     </modules>
   </component>
 </project>

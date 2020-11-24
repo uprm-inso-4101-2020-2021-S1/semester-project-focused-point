@@ -26,11 +26,11 @@ public class AppMainScreen extends AppCompatActivity {
 
     // Defines what happens when user clicks on "Body Mass Index"
     public void openBMI(View view) {
-
+        startActivity(new Intent(AppMainScreen.this, BMIActivity.class));
     }
 
     // Defines what happens when user clicks on "Fat Mass Index"
     public void openFMI(View view) {
-
+        startActivity(new Intent(AppMainScreen.this, FMIActivity.class));
     }
 }

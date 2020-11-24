@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.focusedpoint.weighttracker.SQLiteDatabase.SQLite;
 import com.focusedpoint.weighttracker.Storage.WeightEntry;
 
 import com.jjoe64.graphview.GraphView;
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     File VisitorFile;
     String UserFileName = "UserData.txt";
     String VisitorFileName = "VisitorData.txt";
+    SQLite myDataBase;
 
     double x,y;
 
@@ -71,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         Graph.setVisibility(View.INVISIBLE);
         enableSubmitButton();
         enableGraphButton();
+        myDataBase = new SQLite(this);
     }
 
     private void enableGraphButton() {

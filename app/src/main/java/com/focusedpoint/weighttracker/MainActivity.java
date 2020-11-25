@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.focusedpoint.weighttracker.SQLiteDatabase.SQLite;
 import com.focusedpoint.weighttracker.Storage.WeightEntry;
 
 import com.jjoe64.graphview.GraphView;
@@ -51,9 +52,12 @@ public class MainActivity extends AppCompatActivity {
     //File that contains the information regarding the user of the application
     static File UserFile;
     //File that contains the information regarding the user of the application
+
     static File VisitorFile;
     static String UserFileName = "UserData.txt";
     static String VisitorFileName = "VisitorData.txt";
+    SQLite myDataBase;
+
 
     double x,y;
 
@@ -80,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
                                        });
         enableSubmitButton();
         enableGraphButton();
+        myDataBase = new SQLite(this);
     }
 
     private void changeScreen() {

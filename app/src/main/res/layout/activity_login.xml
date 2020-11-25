@@ -54,16 +54,16 @@
         android:background="@drawable/sign_in"
         android:backgroundTint="#FFFFFF"
         android:enabled="false"
-        android:text="@string/action_sign_in"
+        android:onClick="signIn"
+        android:text="SIGN IN"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.235"
+        app:layout_constraintHorizontal_bias="0.249"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.554"
-        tools:text="Sign In"
-        android:onClick="signIn"/>
+        app:layout_constraintVertical_bias="0.567"
+        tools:text="Sign In" />
 
     <ProgressBar
         android:id="@+id/loading"
@@ -87,13 +87,13 @@
         android:layout_height="wrap_content"
         android:background="#00FFFFFF"
         android:backgroundTint="#00FFFFFF"
+        android:onClick="OpenSignupPage"
         android:text="Sign Up"
         android:textColor="#FFFFFF"
-        android:onClick="OpenSignupPage"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.671"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.55"/>
+        app:layout_constraintVertical_bias="0.563" />
 </androidx.constraintlayout.widget.ConstraintLayout>

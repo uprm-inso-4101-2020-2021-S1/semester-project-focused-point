@@ -1,4 +1,5 @@
 package com.focusedpoint.weighttracker.SQLiteDatabase;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -6,13 +7,14 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 public class SQLite extends SQLiteOpenHelper {
+    public static final String DATABASE_NAME = "User.db";
     public static final String USER_TABLE = "USER_TABLE";
     public static final String USER_USERNAME = "USER_USERNAME";
     public static final String USER_PASSWORD = "USER_PASSWORD";
     SQLiteDatabase weight;
 
     public SQLite(@Nullable Context context) {
-        super(context, "user.db", null, 1);
+        super(context, DATABASE_NAME, null, 1);
     }
 
     //called first time a database is accessed.
@@ -23,9 +25,28 @@ public class SQLite extends SQLiteOpenHelper {
 
     db.execSQL(createTableStatement);
     }
+
+
     //upgrades the users database on the apps when the database is changed
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("Drop Table If Exists "+DATABASE_NAME);
+        onCreate(db);
+    }
+
+    public boolean insertData(String userName, String passWord){
+        SQLiteDatabase myDB = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(USER_USERNAME,userName);
+        contentValues.put(USER_PASSWORD,passWord);
+        long result = myDB.insert(USER_TABLE,null, contentValues);
+
+        if(result == -1){
+            return false;
+        }
+        else{
+            return true;
+        }
 
     }
 }

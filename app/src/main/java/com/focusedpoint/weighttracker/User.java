@@ -30,7 +30,7 @@ public class User {
 	private String username, password;				
 	private int age;
 	private ArrayList<WeightEntry> weights;		//Weights will be measured in pounds
-	public Map<String, FoodEntry> ht;			//HashTable that contains a key which is the name of the food and a value that contains an object holding all the information related to the food.
+	public static Map<String, FoodEntry> ht;			//HashTable that contains a key which is the name of the food and a value that contains an object holding all the information related to the food.
 	private int heightFT, heightIN;			//Height will be measured in feet & inches
 	public enum sex {
 		MALE, FEMALE
@@ -189,7 +189,7 @@ public class User {
 		this.weights=list;
 	}
 
-	public String toString() {
+	public String toString() throws NullPointerException{
 		return "(" + username + ", " + password + ", " + uSex + ", " + age + " yrs, "
 				+ currentWeight() + " lb, " + heightFT + "'" + heightIN + "\")"+"\nWeights with Dates:\n"+getWeights().toString()+"Foods with Calories:\n"+ht.toString();
 	}

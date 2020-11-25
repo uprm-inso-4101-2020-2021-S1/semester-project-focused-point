@@ -3,6 +3,7 @@ package com.focusedpoint.weighttracker;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
@@ -35,11 +36,11 @@ import java.util.Scanner;
 public class MainActivity extends AppCompatActivity {
 
 
-    User user;
+    public static User user;
     //Used to store data from the graph.
     LineGraphSeries<DataPoint> SeriesGraph;
     EditText NumberField;
-    Button SubmitButton,GraphButton;
+    Button SubmitButton,GraphButton,FoodButton;
     //List that contains all the weights of a person.
     // (Planing to make each index of the list represent a day of the month.)
     ArrayList<Integer> Weights = new ArrayList<Integer>(31);
@@ -48,11 +49,11 @@ public class MainActivity extends AppCompatActivity {
 
     SharedPreferences SaveData;
     //File that contains the information regarding the user of the application
-    File UserFile;
+    static File UserFile;
     //File that contains the information regarding the user of the application
-    File VisitorFile;
-    String UserFileName = "UserData.txt";
-    String VisitorFileName = "VisitorData.txt";
+    static File VisitorFile;
+    static String UserFileName = "UserData.txt";
+    static String VisitorFileName = "VisitorData.txt";
 
     double x,y;
 
@@ -69,8 +70,20 @@ public class MainActivity extends AppCompatActivity {
         NumberField = findViewById(R.id.NumberField);
         Graph = (GraphView) findViewById(R.id.graph);
         Graph.setVisibility(View.INVISIBLE);
+        FoodButton = (Button) findViewById(R.id.button4);
+        //sets the behavior of the graph button
+        FoodButton.setOnClickListener(new View.OnClickListener() {
+                                           @Override
+                                           public void onClick(View v) {
+                                               changeScreen();
+                                           }
+                                       });
         enableSubmitButton();
         enableGraphButton();
+    }
+
+    private void changeScreen() {
+        startActivity(new Intent(this, FoodTrackerActivity.class));
     }
 
     private void enableGraphButton() {
@@ -187,6 +200,7 @@ public String WriteData(User user) throws IOException {
             //reads the contents of a file line by line
             while(scan.hasNextLine()) {
                 String TempLine = scan.nextLine();
+                Log.println(Log.INFO,"debug","\n"+TempLine);
                 //if the string TempLine contains "Username: "
                 if(TempLine.contains("Username: ")){
                     user.setUsername(TempLine.substring(10,TempLine.length()));

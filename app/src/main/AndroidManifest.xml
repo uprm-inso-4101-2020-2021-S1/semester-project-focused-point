@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".BMIActivity"></activity>
+        <activity
+            android:name=".FoodTrackerActivity"
+            android:label="@string/title_activity_food_tracker"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".BMIActivity" />
         <activity android:name=".FMIActivity" />
         <activity android:name=".AppMainScreen" />
         <activity android:name=".SignUpActivity" />
@@ -22,27 +26,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".ItemListActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-        </activity>
-        <activity
-            android:name=".ItemDetailActivity"
-            android:label="@string/title_item_detail"
-            android:parentActivityName=".ItemListActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.focusedpoint.weighttracker.ItemListActivity" />
         </activity>
     </application>
 

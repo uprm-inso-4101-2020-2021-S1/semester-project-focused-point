@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     File VisitorFile;
     String UserFileName = "UserData.txt";
     String VisitorFileName = "VisitorData.txt";
+    //DataBase
     SQLite myDataBase;
 
     double x,y;
@@ -73,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
         Graph.setVisibility(View.INVISIBLE);
         enableSubmitButton();
         enableGraphButton();
+        //DataBase instance
         myDataBase = new SQLite(this);
     }
 

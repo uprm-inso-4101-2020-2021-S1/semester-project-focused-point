@@ -63,9 +63,11 @@ public class SignUpActivity extends AppCompatActivity {
             public void onClick(View v) {
                boolean isInserted =  myDataBase.insertData(userName.getText().toString(),password.getText().toString());
                if(isInserted = true){
+                   //If the insertion on database was successful, it will display "User Created!" in the screen;
                    Toast.makeText(SignUpActivity.this,"User Created!", Toast.LENGTH_LONG).show();
                }
                else{
+                   //If the insertion on database was successful, it will display "User Not Created!" in the screen;
                    Toast.makeText(SignUpActivity.this,"User Not Created!", Toast.LENGTH_LONG).show();
                }
             }

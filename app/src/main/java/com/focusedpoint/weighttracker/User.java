@@ -193,6 +193,9 @@ public class User {
 		return "(" + username + ", " + password + ", " + uSex + ", " + age + " yrs, "
 				+ currentWeight() + " lb, " + heightFT + "'" + heightIN + "\")"+"\nWeights with Dates:\n"+getWeights().toString()+"Foods with Calories:\n"+ht.toString();
 	}
+	public String UserStatustoString() throws NullPointerException{
+		return "Username: "+username+"\nSex: " + uSex + "\nAge: " + age + " yrs\nCurrent Weight: "	+ currentWeight() + " lb\n Height: " + heightFT + "'" + heightIN +"\nWeights with Dates:\n"+getWeights().toString()+"Foods with Calories:\n"+ht.toString();
+	}
 	public void clear(){
 		username="";
 		password = "";

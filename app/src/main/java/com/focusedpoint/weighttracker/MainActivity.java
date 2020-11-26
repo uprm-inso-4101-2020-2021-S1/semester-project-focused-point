@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     //Used to store data from the graph.
     LineGraphSeries<DataPoint> SeriesGraph;
     EditText NumberField;
-    Button SubmitButton,GraphButton,FoodButton;
+    Button SubmitButton,GraphButton,FoodButton,StatButton;
     //List that contains all the weights of a person.
     // (Planing to make each index of the list represent a day of the month.)
     ArrayList<Integer> Weights = new ArrayList<Integer>(31);
@@ -65,30 +65,52 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if(SignUpActivity.MainUser==null){
         try {
             LoadUserData();
         } catch (IOException e) {
             e.printStackTrace();
             user = new User("admin","password", User.sex.MALE,40,180,6,5);//This user is a place holder. It is supposed to be provided by the login activity.
+        }}else{
+            user =SignUpActivity.MainUser;
         }
         NumberField = findViewById(R.id.NumberField);
         Graph = (GraphView) findViewById(R.id.graph);
         Graph.setVisibility(View.INVISIBLE);
         FoodButton = (Button) findViewById(R.id.button4);
+        StatButton = (Button) findViewById(R.id.logo);
         //sets the behavior of the graph button
         FoodButton.setOnClickListener(new View.OnClickListener() {
                                            @Override
                                            public void onClick(View v) {
-                                               changeScreen();
+                                               try {
+                                                   changeScreen();
+                                                   finish();
+                                               } catch (InterruptedException e) {
+                                                   e.printStackTrace();
+                                               }
                                            }
                                        });
+        StatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeScreenToStats();
+            }
+        });
         enableSubmitButton();
         enableGraphButton();
         myDataBase = new SQLite(this);
+        System.gc();
     }
 
-    private void changeScreen() {
+    private void changeScreen() throws InterruptedException {
+        Thread.sleep(200);
         startActivity(new Intent(this, FoodTrackerActivity.class));
+    }
+
+    private void changeScreenToStats() {
+        System.gc();
+        startActivity(new Intent(this, Stats_Activity.class));
     }
 
     private void enableGraphButton() {
@@ -145,15 +167,14 @@ public class MainActivity extends AppCompatActivity {
             try {
                 user.setWeight(Integer.parseInt(NumericalInput));
                 NumberField.setText("");
-                user.addMeal("Travipatty", 630);
                 String debug = ArrayListToString(user.getWeights());
                 Log.println(Log.INFO,"debug","The weights are:"+debug);
-//                SaveData();
+                WriteData(user);
             }
             //if an error occurs, then the text inside NumberField is not a valid weight
-            catch (NumberFormatException e){
+            catch (NumberFormatException | IOException e){
             NumberField.setText("");
-            user.setWeights(new com.focusedpoint.weighttracker.DataStructures.list.ArrayList<WeightEntry>(10));
+//            user.setWeights(new com.focusedpoint.weighttracker.DataStructures.list.ArrayList<WeightEntry>(10));
             Log.println(Log.INFO,"debug","Not a valid weight");
             }
         }

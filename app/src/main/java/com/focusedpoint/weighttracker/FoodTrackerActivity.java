@@ -28,6 +28,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class FoodTrackerActivity extends AppCompatActivity {
@@ -80,6 +81,8 @@ public class FoodTrackerActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         } catch (NullPointerException e){
+            e.printStackTrace();
+        }catch (NoSuchElementException e){
             e.printStackTrace();
         }
     }

@@ -134,10 +134,12 @@ public class LoginActivity extends AppCompatActivity {
 
     public void OpenSignupPage(View view) {
         startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
+        finish();
     }
 
     public void signIn(View view) {
         startActivity(new Intent(LoginActivity.this, AppMainScreen.class));
+        finish();
 
     }
 }

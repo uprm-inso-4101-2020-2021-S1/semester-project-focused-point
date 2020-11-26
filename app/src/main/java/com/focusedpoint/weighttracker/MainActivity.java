@@ -56,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
     static File VisitorFile;
     static String UserFileName = "UserData.txt";
     static String VisitorFileName = "VisitorData.txt";
+    //DataBase
+
     SQLite myDataBase;
 
 
@@ -99,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
         });
         enableSubmitButton();
         enableGraphButton();
+        //DataBase instance
         myDataBase = new SQLite(this);
         System.gc();
     }

@@ -10,11 +10,7 @@
         android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-        android:theme="@style/AppTheme"
-        android:largeHeap="true"
-        android:hardwareAccelerated="false">
+        android:theme="@style/AppTheme">
         <activity android:name=".BMIActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
 
@@ -32,68 +28,23 @@
 
         <activity android:name=".ui.login.LoginActivity"
                   android:theme="@style/AppTheme.NoActionBar">
-=======
-        android:theme="@style/AppTheme">
-        <activity android:name=".BMIActivity"></activity>
-=======
-        android:theme="@style/AppTheme">
-        <activity android:name=".VisitorActivity"></activity>
-        <activity android:name=".Stats_Activity" />
-        <activity
-            android:name=".FoodTrackerActivity"
-            android:label="@string/title_activity_food_tracker"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".BMIActivity" />
->>>>>>> 52e9bc3a51d155423284b6dcd30812ea49d09799
-        <activity android:name=".FMIActivity" />
-        <activity android:name=".AppMainScreen" />
-        <activity android:name=".SignUpActivity" />
-        <activity
-            android:name=".ui.login.LoginActivity"
-            android:label="@string/title_activity_login">
-<<<<<<< HEAD
->>>>>>> Stashed changes
-=======
->>>>>>> 52e9bc3a51d155423284b6dcd30812ea49d09799
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<<<<<<< HEAD
-<<<<<<< Updated upstream
+        
+        <activity android:name=".VisitorActivity"></activity>
+        <activity android:name=".Stats_Activity" />
+        <activity
+            android:name=".FoodTrackerActivity"
+            android:label="@string/title_activity_food_tracker"
+            android:theme="@style/AppTheme.NoActionBar" />
 
 
         <activity android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
-=======
-        <activity android:name=".MainActivity"/>
->>>>>>> Stashed changes
-
-        <activity
-            android:name=".ItemListActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
-        </activity>
-        <activity
-            android:name=".ItemDetailActivity"
-            android:label="@string/title_item_detail"
-            android:parentActivityName=".ItemListActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.focusedpoint.weighttracker.ItemListActivity" />
-        </activity>
-=======
-        <activity android:name=".MainActivity" />
->>>>>>> 52e9bc3a51d155423284b6dcd30812ea49d09799
     </application>
 
 </manifest>

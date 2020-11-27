@@ -22,6 +22,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
+import java.util.Random;
 import java.util.Scanner;
 
 public class User {
@@ -30,12 +31,13 @@ public class User {
 	private String username, password;				
 	private int age;
 	private ArrayList<WeightEntry> weights;		//Weights will be measured in pounds
-	public Map<String, FoodEntry> ht;			//HashTable that contains a key which is the name of the food and a value that contains an object holding all the information related to the food.
+	public static Map<String, FoodEntry> ht;			//HashTable that contains a key which is the name of the food and a value that contains an object holding all the information related to the food.
 	private int heightFT, heightIN;			//Height will be measured in feet & inches
 	public enum sex {
 		MALE, FEMALE
 	}
 	sex uSex;
+	Integer VisitorCode;
 	
 	public User(String un, String pw, sex uSex, int age, int weight, int heightFT, int heightIN) {
 		if (weight < 1) {
@@ -54,6 +56,8 @@ public class User {
 		this.ht = factory.getInstance(10);
 		this.heightFT = heightFT;
 		this.heightIN = heightIN;
+		Random R = new Random();
+		this.setVisitorCode(1000+R.nextInt(1000));
 	}
 	
 	public int currentWeight() {
@@ -189,9 +193,12 @@ public class User {
 		this.weights=list;
 	}
 
-	public String toString() {
+	public String toString() throws NullPointerException{
 		return "(" + username + ", " + password + ", " + uSex + ", " + age + " yrs, "
 				+ currentWeight() + " lb, " + heightFT + "'" + heightIN + "\")"+"\nWeights with Dates:\n"+getWeights().toString()+"Foods with Calories:\n"+ht.toString();
+	}
+	public String UserStatustoString() throws NullPointerException{
+		return "Username: "+username+"\nSex: " + uSex + "\nAge: " + age + " yrs\nCurrent Weight: "	+ currentWeight() + " lb\n Height: " + heightFT + "'" + heightIN +"\nWeights with Dates:\n"+getWeights().toString()+"Foods with Calories:\n"+ht.toString();
 	}
 	public void clear(){
 		username="";
@@ -204,4 +211,11 @@ public class User {
 		this.heightIN = 0;
 	}
 
+	public Integer getVisitorCode() {
+		return VisitorCode;
+	}
+
+	public void setVisitorCode(Integer visitorCode) {
+		VisitorCode = visitorCode;
+	}
 }

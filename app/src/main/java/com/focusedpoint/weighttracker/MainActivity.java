@@ -3,6 +3,7 @@ package com.focusedpoint.weighttracker;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
@@ -14,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.focusedpoint.weighttracker.SQLiteDatabase.SQLite;
 import com.focusedpoint.weighttracker.Storage.WeightEntry;
 
 import com.jjoe64.graphview.GraphView;
@@ -35,11 +37,11 @@ import java.util.Scanner;
 public class MainActivity extends AppCompatActivity {
 
 
-    User user;
+    public static User user;
     //Used to store data from the graph.
     LineGraphSeries<DataPoint> SeriesGraph;
     EditText NumberField;
-    Button SubmitButton,GraphButton;
+    Button SubmitButton,GraphButton,FoodButton,StatButton;
     //List that contains all the weights of a person.
     // (Planing to make each index of the list represent a day of the month.)
     ArrayList<Integer> Weights = new ArrayList<Integer>(31);
@@ -48,11 +50,16 @@ public class MainActivity extends AppCompatActivity {
 
     SharedPreferences SaveData;
     //File that contains the information regarding the user of the application
-    File UserFile;
+    static File UserFile;
     //File that contains the information regarding the user of the application
-    File VisitorFile;
-    String UserFileName = "UserData.txt";
-    String VisitorFileName = "VisitorData.txt";
+
+    static File VisitorFile;
+    static String UserFileName = "UserData.txt";
+    static String VisitorFileName = "VisitorData.txt";
+    //DataBase
+
+    SQLite myDataBase;
+
 
     double x,y;
 
@@ -60,17 +67,53 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if(SignUpActivity.MainUser==null){
         try {
             LoadUserData();
         } catch (IOException e) {
             e.printStackTrace();
             user = new User("admin","password", User.sex.MALE,40,180,6,5);//This user is a place holder. It is supposed to be provided by the login activity.
+        }}else{
+            user =SignUpActivity.MainUser;
         }
         NumberField = findViewById(R.id.NumberField);
         Graph = (GraphView) findViewById(R.id.graph);
         Graph.setVisibility(View.INVISIBLE);
+        FoodButton = (Button) findViewById(R.id.button4);
+        StatButton = (Button) findViewById(R.id.logo);
+        //sets the behavior of the graph button
+        FoodButton.setOnClickListener(new View.OnClickListener() {
+                                           @Override
+                                           public void onClick(View v) {
+                                               try {
+                                                   changeScreen();
+                                                   finish();
+                                               } catch (InterruptedException e) {
+                                                   e.printStackTrace();
+                                               }
+                                           }
+                                       });
+        StatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeScreenToStats();
+            }
+        });
         enableSubmitButton();
         enableGraphButton();
+        //DataBase instance
+        myDataBase = new SQLite(this);
+        System.gc();
+    }
+
+    private void changeScreen() throws InterruptedException {
+        Thread.sleep(200);
+        startActivity(new Intent(this, FoodTrackerActivity.class));
+    }
+
+    private void changeScreenToStats() {
+        System.gc();
+        startActivity(new Intent(this, Stats_Activity.class));
     }
 
     private void enableGraphButton() {
@@ -127,15 +170,14 @@ public class MainActivity extends AppCompatActivity {
             try {
                 user.setWeight(Integer.parseInt(NumericalInput));
                 NumberField.setText("");
-                user.addMeal("Travipatty", 630);
                 String debug = ArrayListToString(user.getWeights());
                 Log.println(Log.INFO,"debug","The weights are:"+debug);
-//                SaveData();
+                WriteData(user);
             }
             //if an error occurs, then the text inside NumberField is not a valid weight
-            catch (NumberFormatException e){
+            catch (NumberFormatException | IOException e){
             NumberField.setText("");
-            user.setWeights(new com.focusedpoint.weighttracker.DataStructures.list.ArrayList<WeightEntry>(10));
+//            user.setWeights(new com.focusedpoint.weighttracker.DataStructures.list.ArrayList<WeightEntry>(10));
             Log.println(Log.INFO,"debug","Not a valid weight");
             }
         }
@@ -156,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 public String WriteData(User user) throws IOException {
-    String UserData = "Username: "+user.getUsername()+"\nPassword: "+user.getPassword()+"\nAge: "+user.getAge()+"\nSex: "+user.getSex()+"\nHeight Feet: "+user.getHeightFT()+"\nHeight inches: " +user.getHeightIN()+"\nWeights with Dates:\n"+user.getWeights().toString()+"Foods with Calories:\n"+user.ht.toString();
+    String UserData = "Visitor Code: "+user.getVisitorCode()+ "\nUsername: "+user.getUsername()+"\nPassword: "+user.getPassword()+"\nAge: "+user.getAge()+"\nSex: "+user.getSex()+"\nHeight Feet: "+user.getHeightFT()+"\nHeight inches: " +user.getHeightIN()+"\nWeights with Dates:\n"+user.getWeights().toString()+"Foods with Calories:\n"+user.ht.toString();
    // Log.println(Log.INFO,"debug","This is the data Written: "+UserData);
     String VisitorData = "Username: "+"Visitor"+"\nPassword: "+"NONE"+"\nSex: "+user.getSex()+"\nHeight Feet: "+user.getHeightFT()+"\nHeight inches: " +user.getHeightIN()+"\nWeights with Dates:\n"+user.getWeights().toString()+"Foods with Calories:\n"+user.ht.toString();
     FileOutputStream UD = openFileOutput("UserData.txt",Context.MODE_PRIVATE);
@@ -187,8 +229,13 @@ public String WriteData(User user) throws IOException {
             //reads the contents of a file line by line
             while(scan.hasNextLine()) {
                 String TempLine = scan.nextLine();
-                //if the string TempLine contains "Username: "
-                if(TempLine.contains("Username: ")){
+                Log.println(Log.INFO,"debug","\n"+TempLine);
+                //if the string TempLine contains "Visitor Code: "
+                if(TempLine.contains("Visitor Code: ")){
+                    user.setVisitorCode(Integer.parseInt(TempLine.substring(14,TempLine.length())));
+                }
+                //if the string TempLine contains "Username:
+                else if(TempLine.contains("Username: ")){
                     user.setUsername(TempLine.substring(10,TempLine.length()));
                 }
                 //if the string TempLine contains "Password: "

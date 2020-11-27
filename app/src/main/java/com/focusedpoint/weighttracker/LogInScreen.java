@@ -25,4 +25,5 @@ public class LogInScreen {
     public void login(String username, String password) {
         if(incorrectUsername(username) || incorrectPassword(password));
     }
+
 }

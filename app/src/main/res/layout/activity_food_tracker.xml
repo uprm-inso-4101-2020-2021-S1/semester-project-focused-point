@@ -22,10 +22,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.872"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/FoodNameField" />
+        app:layout_constraintTop_toTopOf="@+id/VisitorField" />
 
     <EditText
-        android:id="@+id/FoodNameField"
+        android:id="@+id/VisitorField"
         android:layout_width="104dp"
         android:layout_height="42dp"
         android:layout_marginStart="56dp"
@@ -90,9 +90,9 @@
         android:layout_height="22dp"
         android:text="Food Name"
         android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/FoodNameField"
-        app:layout_constraintEnd_toEndOf="@+id/FoodNameField"
-        app:layout_constraintStart_toStartOf="@+id/FoodNameField"
+        app:layout_constraintBottom_toTopOf="@+id/VisitorField"
+        app:layout_constraintEnd_toEndOf="@+id/VisitorField"
+        app:layout_constraintStart_toStartOf="@+id/VisitorField"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.876" />
 

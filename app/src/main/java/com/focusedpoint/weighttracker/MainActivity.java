@@ -198,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 public String WriteData(User user) throws IOException {
-    String UserData = "Username: "+user.getUsername()+"\nPassword: "+user.getPassword()+"\nAge: "+user.getAge()+"\nSex: "+user.getSex()+"\nHeight Feet: "+user.getHeightFT()+"\nHeight inches: " +user.getHeightIN()+"\nWeights with Dates:\n"+user.getWeights().toString()+"Foods with Calories:\n"+user.ht.toString();
+    String UserData = "Visitor Code: "+user.getVisitorCode()+ "\nUsername: "+user.getUsername()+"\nPassword: "+user.getPassword()+"\nAge: "+user.getAge()+"\nSex: "+user.getSex()+"\nHeight Feet: "+user.getHeightFT()+"\nHeight inches: " +user.getHeightIN()+"\nWeights with Dates:\n"+user.getWeights().toString()+"Foods with Calories:\n"+user.ht.toString();
    // Log.println(Log.INFO,"debug","This is the data Written: "+UserData);
     String VisitorData = "Username: "+"Visitor"+"\nPassword: "+"NONE"+"\nSex: "+user.getSex()+"\nHeight Feet: "+user.getHeightFT()+"\nHeight inches: " +user.getHeightIN()+"\nWeights with Dates:\n"+user.getWeights().toString()+"Foods with Calories:\n"+user.ht.toString();
     FileOutputStream UD = openFileOutput("UserData.txt",Context.MODE_PRIVATE);
@@ -230,8 +230,12 @@ public String WriteData(User user) throws IOException {
             while(scan.hasNextLine()) {
                 String TempLine = scan.nextLine();
                 Log.println(Log.INFO,"debug","\n"+TempLine);
-                //if the string TempLine contains "Username: "
-                if(TempLine.contains("Username: ")){
+                //if the string TempLine contains "Visitor Code: "
+                if(TempLine.contains("Visitor Code: ")){
+                    user.setVisitorCode(Integer.parseInt(TempLine.substring(14,TempLine.length())));
+                }
+                //if the string TempLine contains "Username:
+                else if(TempLine.contains("Username: ")){
                     user.setUsername(TempLine.substring(10,TempLine.length()));
                 }
                 //if the string TempLine contains "Password: "

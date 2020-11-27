@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 
 import com.focusedpoint.weighttracker.DataStructures.hashtable.HashTableSC;
-import com.focusedpoint.weighttracker.DataStructures.map.Map;
 import com.focusedpoint.weighttracker.Storage.FoodEntry;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -12,12 +11,9 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
 
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -49,7 +45,7 @@ public class FoodTrackerActivity extends AppCompatActivity {
         initializeButtons();
         Layout = findViewById(R.id.ConstraintLayout);
         Index =0;
-        FoodNameField = ((EditText)findViewById(R.id.FoodNameField));
+        FoodNameField = ((EditText)findViewById(R.id.VisitorField));
         CalorieField = ((EditText)findViewById(R.id.CalorieField));
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

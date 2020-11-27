@@ -22,6 +22,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
+import java.util.Random;
 import java.util.Scanner;
 
 public class User {
@@ -36,6 +37,7 @@ public class User {
 		MALE, FEMALE
 	}
 	sex uSex;
+	Integer VisitorCode;
 	
 	public User(String un, String pw, sex uSex, int age, int weight, int heightFT, int heightIN) {
 		if (weight < 1) {
@@ -54,6 +56,8 @@ public class User {
 		this.ht = factory.getInstance(10);
 		this.heightFT = heightFT;
 		this.heightIN = heightIN;
+		Random R = new Random();
+		this.setVisitorCode(1000+R.nextInt(1000));
 	}
 	
 	public int currentWeight() {
@@ -207,4 +211,11 @@ public class User {
 		this.heightIN = 0;
 	}
 
+	public Integer getVisitorCode() {
+		return VisitorCode;
+	}
+
+	public void setVisitorCode(Integer visitorCode) {
+		VisitorCode = visitorCode;
+	}
 }

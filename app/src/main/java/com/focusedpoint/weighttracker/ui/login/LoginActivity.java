@@ -26,6 +26,8 @@ import android.widget.Toast;
 import com.focusedpoint.weighttracker.AppMainScreen;
 import com.focusedpoint.weighttracker.R;
 import com.focusedpoint.weighttracker.SignUpActivity;
+import com.focusedpoint.weighttracker.Stats_Activity;
+import com.focusedpoint.weighttracker.VisitorActivity;
 import com.focusedpoint.weighttracker.ui.login.LoginViewModel;
 import com.focusedpoint.weighttracker.ui.login.LoginViewModelFactory;
 
@@ -44,6 +46,15 @@ public class LoginActivity extends AppCompatActivity {
         final EditText passwordEditText = findViewById(R.id.password);
         final Button loginButton = findViewById(R.id.login);
         final ProgressBar loadingProgressBar = findViewById(R.id.loading);
+        final Button VisitorButton = findViewById(R.id.Visit);
+
+        VisitorButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeScreen();
+                finish();
+            }
+        });
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
@@ -122,10 +133,16 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    private void changeScreen() {
+        System.gc();
+        startActivity(new Intent(this, VisitorActivity.class));
+    }
+
     private void updateUiWithUser(LoggedInUserView model) {
         String welcome = getString(R.string.welcome) + model.getDisplayName();
         // TODO : initiate successful logged in experience
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
+
     }
 
     private void showLoginFailed(@StringRes Integer errorString) {

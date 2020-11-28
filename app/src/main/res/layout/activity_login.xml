@@ -48,15 +48,15 @@
 
     <Button
         android:id="@+id/login"
-        android:layout_width="110dp"
-        android:layout_height="102dp"
+        android:layout_width="97dp"
+        android:layout_height="55dp"
         android:layout_gravity="start"
-        android:background="@drawable/sign_in"
         android:backgroundTint="#FFFFFF"
         android:enabled="false"
         android:onClick="signIn"
+
         android:text="SIGN IN"
-        android:textColor="#000000"
+        android:textColor="#000000" 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.099"

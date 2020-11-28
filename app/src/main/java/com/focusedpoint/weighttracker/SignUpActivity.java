@@ -73,7 +73,7 @@ public class SignUpActivity extends AppCompatActivity {
             }
 
             MainUser = new User(userName, password, User.sex.MALE, Integer.parseInt(age), Integer.parseInt(weight), Integer.parseInt(heightFT), Integer.parseInt(heightIN));
-            myDataBase.insertData(userName,password,new DatabaseEntry(MainUser.getUsername(),MainUser.getPassword(),UserFile,VisitorFile));
+            //myDataBase.insertData(userName,password,new DatabaseEntry(MainUser.getUsername(),MainUser.getPassword(),UserFile,VisitorFile));
             userName = null;
             password = null;
             gender = null;
@@ -115,7 +115,7 @@ public class SignUpActivity extends AppCompatActivity {
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               boolean isInserted =  myDataBase.insertData(userName,password,new DatabaseEntry(MainUser.getUsername(),MainUser.getPassword(),UserFile,VisitorFile));
+               boolean isInserted =  myDataBase.insertData(userName,password,new DatabaseEntry(MainUser.getUsername(),MainUser.getPassword(),UserFile));
                if(isInserted = true){
                    //If the insertion on database was successful, it will display "User Created!" in the screen;
                    Toast.makeText(SignUpActivity.this,"User Created!", Toast.LENGTH_LONG).show();

@@ -162,11 +162,11 @@ public class FoodTrackerActivity extends AppCompatActivity {
     public void addButton() throws IOException {
         Button b = FoodButtons.get(Index);
         b.setText(FoodNameField.getText()+"\n"+CalorieField.getText()+"\n"+1);
-        MainActivity.user.addMeal(FoodNameField.getText().toString(),Double.parseDouble(CalorieField.getText().toString()));
+        //MainActivity.user.addMeal(FoodNameField.getText().toString(),Double.parseDouble(CalorieField.getText().toString()));
         FoodNameField.setText("");
         CalorieField.setText("");
         b.setVisibility(View.VISIBLE);
-        WriteData(MainActivity.user);
+        //WriteData(MainActivity.user);
         Index++;
     }
     //Same method present in the main activity class but modified to fit the food tracking activity.

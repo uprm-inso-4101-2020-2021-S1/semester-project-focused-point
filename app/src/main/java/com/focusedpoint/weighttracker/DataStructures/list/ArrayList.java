@@ -203,6 +203,7 @@ public class ArrayList<ConvertableToString> implements List<ConvertableToString>
 	@Override
 	public String toString() {
 		String result = "";
+		if(elements!=null)
 		for(ConvertableToString s:elements){
 			if(s!=null)
 			result=result+s.toString()+"\n";

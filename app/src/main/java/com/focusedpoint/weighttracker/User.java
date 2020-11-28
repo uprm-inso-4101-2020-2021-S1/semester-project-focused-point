@@ -59,6 +59,11 @@ public class User {
 		Random R = new Random();
 		this.setVisitorCode(1000+R.nextInt(1000));
 	}
+	public User(){
+		this.weights = new ArrayList<WeightEntry>(10);
+		HashTableFactory<String, FoodEntry> factory = new HashTableSCFactory<String, FoodEntry>();
+		this.ht = factory.getInstance(10);
+	}
 	
 	public int currentWeight() {
 		return this.weights.last().getWeight();

@@ -37,6 +37,8 @@ public class HashTableSC<K, V> implements Map<K, V> {
 		@Override
 		public String toString() {
 			String result ="";
+			if(value == null||key==null)
+				return result;
 			if(value instanceof ConvertableToString){
 				result = result+key+":"+((ConvertableToString)value).toString();
 			}else{

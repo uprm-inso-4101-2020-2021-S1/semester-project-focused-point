@@ -17,6 +17,7 @@
             android:name=".FoodTrackerActivity"
             android:label="@string/title_activity_food_tracker"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity android:name=".BMIActivity" />
         <activity android:name=".FMIActivity" />
         <activity android:name=".AppMainScreen" />

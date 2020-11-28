@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 public class Stats_Activity extends AppCompatActivity {
     TextView StatContents;
+    TextView VisitorCode;
     User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,5 +24,8 @@ public class Stats_Activity extends AppCompatActivity {
     private void fillStatContents() {
         StatContents = findViewById(R.id.Stat_Contents);
         StatContents.setText(user.UserStatustoString());
+        VisitorCode = findViewById(R.id.VC);
+        VisitorCode.setText(""+user.getVisitorCode());
+
     }
 }

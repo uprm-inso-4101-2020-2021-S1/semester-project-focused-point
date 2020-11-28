@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.focusedpoint.weighttracker.SQLiteDatabase.DatabaseEntry;
 import com.focusedpoint.weighttracker.SQLiteDatabase.SQLite;
 import com.focusedpoint.weighttracker.Storage.WeightEntry;
 
@@ -67,15 +68,28 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        boolean loaded =false;
         if(SignUpActivity.MainUser==null){
         try {
             LoadUserData();
+            loaded = true;
         } catch (IOException e) {
             e.printStackTrace();
             user = new User("admin","password", User.sex.MALE,40,180,6,5);//This user is a place holder. It is supposed to be provided by the login activity.
         }}else{
             user =SignUpActivity.MainUser;
         }
+//        try {
+//            Log.println(Log.INFO,"debug","This is the data written to file before DB:\n" + WriteData(user));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        Log.println(Log.INFO,"debug","Entered the matrix");
+//            DatabaseEntry DBE = new DatabaseEntry(user.getUsername(), user.getPassword(), UserFile);
+//            DBE.readData(DBE.toString());
+//        UserFile=DBE.getUserFile();
+//        VisitorFile= DBE.getVisitorFile();
+
         NumberField = findViewById(R.id.NumberField);
         Graph = (GraphView) findViewById(R.id.graph);
         Graph.setVisibility(View.INVISIBLE);
@@ -198,6 +212,11 @@ public class MainActivity extends AppCompatActivity {
 
 
 public String WriteData(User user) throws IOException {
+        if(UserFile!=null){
+            UserFile.delete();
+        }if(VisitorFile!=null){
+        VisitorFile.delete();
+    }
     String UserData = "Visitor Code: "+user.getVisitorCode()+ "\nUsername: "+user.getUsername()+"\nPassword: "+user.getPassword()+"\nAge: "+user.getAge()+"\nSex: "+user.getSex()+"\nHeight Feet: "+user.getHeightFT()+"\nHeight inches: " +user.getHeightIN()+"\nWeights with Dates:\n"+user.getWeights().toString()+"Foods with Calories:\n"+user.ht.toString();
    // Log.println(Log.INFO,"debug","This is the data Written: "+UserData);
     String VisitorData = "Username: "+"Visitor"+"\nPassword: "+"NONE"+"\nSex: "+user.getSex()+"\nHeight Feet: "+user.getHeightFT()+"\nHeight inches: " +user.getHeightIN()+"\nWeights with Dates:\n"+user.getWeights().toString()+"Foods with Calories:\n"+user.ht.toString();

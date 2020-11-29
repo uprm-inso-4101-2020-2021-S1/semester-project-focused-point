@@ -28,7 +28,8 @@ import java.util.Scanner;
 public class User {
 	
 	//private fields
-	private String username, password;				
+	private String username, password;
+	private String name; // created for displaying user's name on main screen
 	private int age;
 	private ArrayList<WeightEntry> weights;		//Weights will be measured in pounds
 	public static Map<String, FoodEntry> ht;			//HashTable that contains a key which is the name of the food and a value that contains an object holding all the information related to the food.
@@ -88,9 +89,8 @@ public class User {
 	
 	//Calculates BMI.
 	public double BMI() {
-		return (currentWeight()*703)/(Math.pow(heightInInches(), 2));
+		return Math.round((currentWeight()*703)/(Math.pow(heightInInches(), 2)));
 	}
-	
 	//BMI classification.
 	public String classifyBMI() {
 		if (BMI() <= 18.5) {
@@ -112,15 +112,16 @@ public class User {
 	public double BFP () {
 		if (this.age > 19) {
 			if (this.uSex.equals(sex.MALE)) {
-				return ((1.20*BMI())+(0.23*this.age))-16.2;
+				return Math.round(((1.20*BMI())+(0.23*this.age))-16.2);
 			} else {
-				return ((1.20*BMI())+(0.23*this.age))-5.2;
+				return Math.round(((1.20*BMI())+(0.23*this.age))-5.2);
 			}
 		}
 		if (this.uSex.equals(sex.MALE)) {
-			return ((1.51*BMI())-(0.7*this.age))-2.2;
+			return Math.round(((1.51*BMI())-(0.7*this.age))-2.2);
 		} else {
-		return (1.51*BMI())-(0.7*(this.age))-1.4;
+
+		return Math.round((1.51*BMI())-(0.7*(this.age))-1.4);
 		}
 	}
 	
@@ -197,6 +198,11 @@ public class User {
 	public void setWeights(ArrayList<WeightEntry> list){
 		this.weights=list;
 	}
+
+	public String getName() { return this.name; }
+
+	public void setName(String name) { this.name = name; }
+
 
 	public String toString() throws NullPointerException{
 		return "(" + username + ", " + password + ", " + uSex + ", " + age + " yrs, "

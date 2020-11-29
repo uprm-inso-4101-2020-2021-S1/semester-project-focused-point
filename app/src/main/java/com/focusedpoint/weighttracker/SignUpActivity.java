@@ -24,6 +24,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     String userName;
     String password;
+    String name;
     String gender;
     String age;
     String weight;
@@ -56,6 +57,7 @@ public class SignUpActivity extends AppCompatActivity {
     public void createUser(View view) {
         userName = ((EditText)findViewById(R.id.username)).getText().toString().trim();
         password = ((EditText)findViewById(R.id.password)).getText().toString().trim();
+        name = ((EditText)findViewById(R.id.name)).getText().toString().trim();
         gender = ((EditText)findViewById(R.id.gender)).getText().toString().trim();
         age = ((EditText)findViewById(R.id.age)).getText().toString().trim();
         weight = ((EditText)findViewById(R.id.weight)).getText().toString().trim();
@@ -66,13 +68,14 @@ public class SignUpActivity extends AppCompatActivity {
 
         // Creates new user using all the info submitted by user upon sign up;
         try {
-            if(userName.length()==0||password.length()==0||gender.length()==0||age.length()==0||weight.length()==0||heightFT.length()==0||heightIN.length()==0){
+            if(userName.length()==0||password.length()==0||gender.length()==0||age.length()==0||weight.length()==0||heightFT.length()==0||heightIN.length()==0 || name.length()==0){
                 Toast toast = Toast.makeText(getApplicationContext(), "Please fill all the fields", Toast.LENGTH_LONG);
                 toast.show();
                 return;
             }
 
             MainUser = new User(userName, password, User.sex.MALE, Integer.parseInt(age), Integer.parseInt(weight), Integer.parseInt(heightFT), Integer.parseInt(heightIN));
+            MainUser.setName(name);
             //myDataBase.insertData(userName,password,new DatabaseEntry(MainUser.getUsername(),MainUser.getPassword(),UserFile,VisitorFile));
             userName = null;
             password = null;
@@ -81,6 +84,7 @@ public class SignUpActivity extends AppCompatActivity {
             weight = null;
             heightFT = null;
             heightIN =null;
+            name = null;
             System.gc();
             // redirects user to Main Screen;
             startActivity(new Intent(SignUpActivity.this, AppMainScreen.class));

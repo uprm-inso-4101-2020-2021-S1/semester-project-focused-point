@@ -8,7 +8,7 @@
     tools:context=".FMIActivity">
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/text"
         android:layout_width="317dp"
         android:layout_height="394dp"
         android:text="Fat Mass Index (FMI) is one of the most important considerations when it comes to determining health. FMI is a ratio that looks at fat mass in relation to height. The normative tables for FMI also take into consideration age and gender irrespective of lean mass."
@@ -22,18 +22,18 @@
         app:layout_constraintVertical_bias="0.884" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/fmiPercentage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="172dp"
-        android:text="Currently: 50%"
+        android:layout_marginBottom="160dp"
         android:textColor="#752222"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textView6"
+        app:layout_constraintBottom_toTopOf="@+id/text"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/shapeableImageView"
-        app:layout_constraintVertical_bias="0.318" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.789" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

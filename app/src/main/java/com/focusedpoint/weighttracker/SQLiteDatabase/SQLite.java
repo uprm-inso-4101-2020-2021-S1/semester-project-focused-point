@@ -1,6 +1,7 @@
 package com.focusedpoint.weighttracker.SQLiteDatabase;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -50,5 +51,27 @@ public class SQLite extends SQLiteOpenHelper {
             return true;
         }
 
+    }
+    //Checks whether the username exists or not
+    public boolean checkUser(String username){
+        SQLiteDatabase myDB = this.getWritableDatabase();
+        Cursor cursor = myDB.rawQuery("Select * from users where username =?", new String[] {username});
+        if(cursor.getCount() > 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    //Checks whether the username password exists or not
+    public boolean checkUsernamePassword(String username, String password){
+        SQLiteDatabase myDB = this.getWritableDatabase();
+        Cursor cursor = myDB.rawQuery("Select * from users where username = ? and password = ?",new String[]{username,password});
+        if(cursor.getCount() > 0){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }

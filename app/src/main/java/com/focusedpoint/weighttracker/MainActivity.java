@@ -19,6 +19,7 @@ import com.focusedpoint.weighttracker.SQLiteDatabase.DatabaseEntry;
 import com.focusedpoint.weighttracker.SQLiteDatabase.SQLite;
 import com.focusedpoint.weighttracker.Storage.WeightEntry;
 
+import com.focusedpoint.weighttracker.ui.login.LoginActivity;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     //Used to store data from the graph.
     LineGraphSeries<DataPoint> SeriesGraph;
     EditText NumberField;
-    Button SubmitButton,GraphButton,FoodButton,StatButton;
+    Button SubmitButton,GraphButton,FoodButton,StatButton, logIn;
     //List that contains all the weights of a person.
     // (Planing to make each index of the list represent a day of the month.)
     ArrayList<Integer> Weights = new ArrayList<Integer>(31);
@@ -57,8 +58,8 @@ public class MainActivity extends AppCompatActivity {
     static File VisitorFile;
     static String UserFileName = "UserData.txt";
     static String VisitorFileName = "VisitorData.txt";
-    //DataBase
 
+    //DataBase
     SQLite myDataBase;
 
 
@@ -95,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
         Graph.setVisibility(View.INVISIBLE);
         FoodButton = (Button) findViewById(R.id.button4);
         StatButton = (Button) findViewById(R.id.logo);
+        logIn = (Button) findViewById(R.id.login);
         //sets the behavior of the graph button
         FoodButton.setOnClickListener(new View.OnClickListener() {
                                            @Override
@@ -369,5 +371,14 @@ public String WriteData(User user) throws IOException {
         LoadDataHelper(VisitorFileName);
     }
 
+    //Action on login button
+    public void logInAction(){
+        logIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            }
+        });
+    }
 
 }

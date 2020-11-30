@@ -119,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
         enableGraphButton();
         //DataBase instance
         myDataBase = new SQLite(this);
+        logInAction();
         System.gc();
     }
 
@@ -377,6 +378,7 @@ public String WriteData(User user) throws IOException {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
             }
         });
     }

@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import com.focusedpoint.weighttracker.AppMainScreen;
 import com.focusedpoint.weighttracker.R;
+import com.focusedpoint.weighttracker.SQLiteDatabase.SQLite;
 import com.focusedpoint.weighttracker.SignUpActivity;
 import com.focusedpoint.weighttracker.Stats_Activity;
 import com.focusedpoint.weighttracker.VisitorActivity;
@@ -35,6 +36,7 @@ import com.focusedpoint.weighttracker.ui.login.LoginViewModelFactory;
 public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
+    SQLite myDB;
 
     public static Context context;
     @Override
@@ -50,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
         final Button loginButton = findViewById(R.id.login);
         final ProgressBar loadingProgressBar = findViewById(R.id.loading);
         final Button VisitorButton = findViewById(R.id.Visit);
+        myDB = new SQLite(this);
 
         VisitorButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,9 +132,27 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadingProgressBar.setVisibility(View.VISIBLE);
-                loginViewModel.login(usernameEditText.getText().toString(),
-                        passwordEditText.getText().toString());
+//                loadingProgressBar.setVisibility(View.VISIBLE);
+//                loginViewModel.login(usernameEditText.getText().toString(),
+//                        passwordEditText.getText().toString());
+
+                String username = usernameEditText.getText().toString();
+                String password = passwordEditText.getText().toString();
+
+                if(username.equals("") || password.equals("")){
+                    Toast.makeText(LoginActivity.this,"Please fill all fields.", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    Boolean checkUserPass = myDB.checkUsernamePassword(username,password);
+                    if(checkUserPass == true){
+                        Toast.makeText(LoginActivity.this,"Log In Successful!", Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(LoginActivity.this, AppMainScreen.class));
+                        finish();
+                    }
+                    else{
+                        Toast.makeText(LoginActivity.this,"Invalid Credentials", Toast.LENGTH_LONG).show();
+                    }
+                }
             }
         });
     }

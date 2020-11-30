@@ -32,7 +32,7 @@ public class SignUpActivity extends AppCompatActivity {
     String heightIN;
     static User MainUser;
     SQLite myDataBase;
-    Button signIn;
+    Button signUp;
     static File UserFile;
     //File that contains the information regarding the user of the application
     static File VisitorFile;
@@ -63,7 +63,7 @@ public class SignUpActivity extends AppCompatActivity {
         weight = ((EditText)findViewById(R.id.weight)).getText().toString().trim();
         heightFT = ((EditText)findViewById(R.id.Feet)).getText().toString().trim();
         heightIN = ((EditText)findViewById(R.id.inches)).getText().toString().trim();
-        signIn = findViewById(R.id.button2);
+        signUp = findViewById(R.id.button2);
 
 
         // Creates new user using all the info submitted by user upon sign up;
@@ -116,7 +116,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     //Adds the new user to the Data Base;
     public void addUser(){
-        signIn.setOnClickListener(new View.OnClickListener() {
+        signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                boolean isInserted =  myDataBase.insertData(userName,password,new DatabaseEntry(MainUser.getUsername(),MainUser.getPassword(),UserFile));

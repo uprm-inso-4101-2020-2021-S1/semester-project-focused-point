@@ -11,13 +11,16 @@ import com.focusedpoint.weighttracker.ui.login.LoginActivity;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 
 public class AppMainScreen extends AppCompatActivity {
 
+
     TextView welcome;
     static User user;
-    static File userFile;
-    static File visitorFile;
+    static File UserFile;
+    static File VisitorFile;
+    public static boolean signout=false;
     String name;
 
     @Override
@@ -26,10 +29,12 @@ public class AppMainScreen extends AppCompatActivity {
         System.gc();
         setContentView(R.layout.activity_app_main_screen);
 
-        if(SignUpActivity.MainUser==null){
+        if(SignUpActivity.MainUser==null&&LoginActivity.user==null){
             user = new User("admin","password", User.sex.MALE,40,180,6,5);//This user is a place holder. It is supposed to be provided by the login activity.
-            }else{
+        }else if(SignUpActivity.MainUser!=null){
             user =SignUpActivity.MainUser;
+        }else if(LoginActivity.user!=null){
+            user= LoginActivity.user;
         }
         name();
     }
@@ -53,15 +58,15 @@ public class AppMainScreen extends AppCompatActivity {
     // Defines what happens when user click on "Sign Out" button;
     public void signout(View view) {
         user.clear();
+        if(LoginActivity.user!=null)
         try {
-            userFile.delete();
-            visitorFile.delete();
+            signout=true;
+            UserFile.delete();
+            VisitorFile.delete();
         }
         catch (NullPointerException e) {
 
         }
-
-
         startActivity(new Intent(AppMainScreen.this, LoginActivity.class));
         finish();
     }

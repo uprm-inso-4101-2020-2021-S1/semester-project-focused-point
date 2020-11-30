@@ -30,6 +30,7 @@ public class SignUpActivity extends AppCompatActivity {
     String weight;
     String heightFT;
     String heightIN;
+    static boolean SignOut= false;
     static User MainUser;
     SQLite myDataBase;
     Button signUp;
@@ -76,6 +77,7 @@ public class SignUpActivity extends AppCompatActivity {
 
             MainUser = new User(userName, password, User.sex.MALE, Integer.parseInt(age), Integer.parseInt(weight), Integer.parseInt(heightFT), Integer.parseInt(heightIN));
             MainUser.setName(name);
+            WriteData(MainUser);
             //myDataBase.insertData(userName,password,new DatabaseEntry(MainUser.getUsername(),MainUser.getPassword(),UserFile,VisitorFile));
             userName = null;
             password = null;
@@ -95,15 +97,22 @@ public class SignUpActivity extends AppCompatActivity {
         }catch (NumberFormatException e){
             Toast toast = Toast.makeText(getApplicationContext(), "Please fill the fields (Age,Height,Weight) with numbers not characters", Toast.LENGTH_LONG);
             toast.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
     }
 
     public String WriteData(User user) throws IOException {
-        String UserData = "Visitor Code: "+user.getVisitorCode()+ "\nUsername: "+user.getUsername()+"\nPassword: "+user.getPassword()+"\nAge: "+user.getAge()+"\nSex: "+user.getSex()+"\nHeight Feet: "+user.getHeightFT()+"\nHeight inches: " +user.getHeightIN()+"\nWeights with Dates:\n"+user.getWeights().toString()+"Foods with Calories:\n"+user.ht.toString();
+        if(UserFile!=null){
+            UserFile.delete();
+        }if(VisitorFile!=null){
+            VisitorFile.delete();
+        }
+        String UserData = "Visitor Code: "+user.getVisitorCode()+ "\n" + "Name: " + user.getName() + "\n" + "Username: "+user.getUsername()+"\nPassword: "+user.getPassword()+"\nAge: "+user.getAge()+"\nSex: "+user.getSex()+"\nHeight Feet: "+user.getHeightFT()+"\nHeight inches: " +user.getHeightIN()+"\nWeights with Dates:\n"+user.getWeights().toString()+"Foods with Calories:\n"+user.ht.toString();
         // Log.println(Log.INFO,"debug","This is the data Written: "+UserData);
-        String VisitorData = "Username: "+"Visitor"+"\nPassword: "+"NONE"+"\nSex: "+user.getSex()+"\nHeight Feet: "+user.getHeightFT()+"\nHeight inches: " +user.getHeightIN()+"\nWeights with Dates:\n"+user.getWeights().toString()+"Foods with Calories:\n"+user.ht.toString();
-        FileOutputStream UD = openFileOutput("UserData.txt", Context.MODE_PRIVATE);
+        String VisitorData = "Username: "+"Visitor"+"Visitor"+"\nPassword: "+"NONE"+"\nSex: "+user.getSex()+"\nHeight Feet: "+user.getHeightFT()+"\nHeight inches: " +user.getHeightIN()+"\nWeights with Dates:\n"+user.getWeights().toString()+"Foods with Calories:\n"+user.ht.toString();
+        FileOutputStream UD = openFileOutput("UserData.txt",Context.MODE_PRIVATE);
         FileOutputStream VD = openFileOutput("VisitorData.txt",Context.MODE_PRIVATE);
         UD.write(UserData.getBytes());
         VD.write(VisitorData.getBytes());

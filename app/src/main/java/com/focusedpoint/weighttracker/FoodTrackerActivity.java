@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import com.focusedpoint.weighttracker.DataStructures.hashtable.HashTableSC;
 import com.focusedpoint.weighttracker.Storage.FoodEntry;
+import com.focusedpoint.weighttracker.ui.login.LoginActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -85,7 +86,7 @@ public class FoodTrackerActivity extends AppCompatActivity {
 
     //Method used to update the text present inside the buttons when starting the activity.
     private void loadFoodData() throws IOException {
-        LoadDataHelper(MainActivity.UserFileName); //needs to be modified so that the visitor does not have this info.
+        LoadDataHelper(LoginActivity.UserFileName); //needs to be modified so that the visitor does not have this info.
         HashTableSC<String, FoodEntry> TempMap= (HashTableSC<String, FoodEntry>) MainActivity.user.ht;
         int size = TempMap.size();
         if(size==0){
@@ -162,11 +163,11 @@ public class FoodTrackerActivity extends AppCompatActivity {
     public void addButton() throws IOException {
         Button b = FoodButtons.get(Index);
         b.setText(FoodNameField.getText()+"\n"+CalorieField.getText()+"\n"+1);
-        //MainActivity.user.addMeal(FoodNameField.getText().toString(),Double.parseDouble(CalorieField.getText().toString()));
+        MainActivity.user.addMeal(FoodNameField.getText().toString(),Double.parseDouble(CalorieField.getText().toString()));
         FoodNameField.setText("");
         CalorieField.setText("");
         b.setVisibility(View.VISIBLE);
-        //WriteData(MainActivity.user);
+        WriteData(MainActivity.user);
         Index++;
     }
     //Same method present in the main activity class but modified to fit the food tracking activity.
@@ -270,9 +271,9 @@ public class FoodTrackerActivity extends AppCompatActivity {
         } catch (IOException e) {
             Log.e("login activity", "Can not read file: "+ FileName+" "+ e.toString());
         }
-        if(FileName==MainActivity.UserFileName)
+        if(FileName== LoginActivity.UserFileName)
             MainActivity.UserFile = new File(getFilesDir(),FileName);
-        else if(FileName==MainActivity.VisitorFileName)
+        else if(FileName==LoginActivity.VisitorFileName)
             MainActivity.VisitorFile = new File(getFilesDir(),FileName);
         return result;
     }

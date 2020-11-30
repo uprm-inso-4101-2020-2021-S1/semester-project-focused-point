@@ -33,7 +33,11 @@ public class FMIActivity extends AppCompatActivity {
     }
 
     private void fillFMIPercentage() {
-        message = "Currently: " + Double.toString(user.BFP()) + "%";
+        try{
+            message = "Currently: " + Double.toString(Math.round(user.BFP())) + "%";
+        }catch (NullPointerException e){
+            message = "Currently: " + "20" + "%";
+        }
         fmiPercentage = findViewById(R.id.fmiPercentage);
         fmiPercentage.setText(message);
     }

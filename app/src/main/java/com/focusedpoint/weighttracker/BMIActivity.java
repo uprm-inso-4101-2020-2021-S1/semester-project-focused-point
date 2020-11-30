@@ -34,7 +34,7 @@ public class BMIActivity extends AppCompatActivity {
     }
 
     private void fillBMI() {
-        message = "Currently: " + Double.toString(user.BMI()) + " (" + user.classifyBMI() + ")";
+        message = "Currently: " + Double.toString(Math.round(user.BMI())) + " (" + user.classifyBMI() + ")";
         bmiPercentage = findViewById(R.id.bmi_percentage);
         bmiPercentage.setText(message);
     }

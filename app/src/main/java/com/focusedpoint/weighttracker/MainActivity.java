@@ -51,13 +51,10 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Button> Buttons;
 
     SharedPreferences SaveData;
-    //File that contains the information regarding the user of the application
     static File UserFile;
     //File that contains the information regarding the user of the application
 
     static File VisitorFile;
-    static String UserFileName = "UserData.txt";
-    static String VisitorFileName = "VisitorData.txt";
 
     //DataBase
     SQLite myDataBase;
@@ -70,26 +67,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         boolean loaded =false;
-        if(SignUpActivity.MainUser==null){
-        try {
-            LoadUserData();
-            loaded = true;
-        } catch (IOException e) {
-            e.printStackTrace();
+        if(AppMainScreen.user==null){
             user = new User("admin","password", User.sex.MALE,40,180,6,5);//This user is a place holder. It is supposed to be provided by the login activity.
-        }}else{
-            user =SignUpActivity.MainUser;
+        }else{
+            user =AppMainScreen.user;
+            UserFile = AppMainScreen.UserFile;
+            VisitorFile = AppMainScreen.VisitorFile;
         }
-//        try {
-//            Log.println(Log.INFO,"debug","This is the data written to file before DB:\n" + WriteData(user));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        Log.println(Log.INFO,"debug","Entered the matrix");
-//            DatabaseEntry DBE = new DatabaseEntry(user.getUsername(), user.getPassword(), UserFile);
-//            DBE.readData(DBE.toString());
-//        UserFile=DBE.getUserFile();
-//        VisitorFile= DBE.getVisitorFile();
+
 
         NumberField = findViewById(R.id.NumberField);
         Graph = (GraphView) findViewById(R.id.graph);
@@ -354,9 +339,9 @@ public String WriteData(User user) throws IOException {
         } catch (IOException e) {
             Log.e("login activity", "Can not read file: "+ FileName+" "+ e.toString());
         }
-        if(FileName==UserFileName)
+        if(FileName==LoginActivity.UserFileName)
             UserFile = new File(getFilesDir(),FileName);
-        else if(FileName==VisitorFileName)
+        else if(FileName==LoginActivity.VisitorFileName)
             VisitorFile = new File(getFilesDir(),FileName);
         return result;
     }
@@ -364,11 +349,11 @@ public String WriteData(User user) throws IOException {
 
 
     public void LoadUserData() throws IOException {
-        LoadDataHelper(UserFileName);
+        LoadDataHelper(LoginActivity.UserFileName);
     }
 
     public void LoadVisitorData() throws IOException {
-        LoadDataHelper(VisitorFileName);
+        LoadDataHelper(LoginActivity.VisitorFileName);
     }
 
     //Action on login button

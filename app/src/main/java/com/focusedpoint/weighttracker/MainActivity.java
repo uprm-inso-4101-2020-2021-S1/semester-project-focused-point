@@ -119,7 +119,6 @@ public class MainActivity extends AppCompatActivity {
         enableGraphButton();
         //DataBase instance
         myDataBase = new SQLite(this);
-        logInAction();
         System.gc();
     }
 
